@@ -12,7 +12,7 @@ DATABASE_URL = "https://your-project-id-default-rtdb.firebaseio.com/"
 if not firebase_admin._apps:
     cred = credentials.Certificate(FIREBASE_CRED_PATH)
     firebase_admin.initialize_app(cred, {
-        'databaseURL': DATABASE_URL
+        'databaseURL': "https://expense-tracker-5f660-default-rtdb.asia-southeast1.firebasedatabase.app/"
     })
 
 # ---------- UTILITY ----------
@@ -96,3 +96,4 @@ if month_key in data:
             st.write(f"Avg Daily Budget: ₹{avg_daily:.2f}")
             st.write(f"Max Daily Spending: ₹{max_spent}")
             st.write(f"Min Daily Spending: ₹{min_spent}")
+
