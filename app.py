@@ -2,7 +2,6 @@ import streamlit as st
 import firebase_admin
 from firebase_admin import credentials, db
 from datetime import date
-import json
 
 # ---------- CONFIG ----------
 # Load Firebase service account key from Streamlit secrets
@@ -96,6 +95,7 @@ if month_key in data:
             st.write(f"Avg Daily Budget: ₹{avg_daily:.2f}")
             st.write(f"Max Daily Spending: ₹{max_spent}")
             st.write(f"Min Daily Spending: ₹{min_spent}")
+
 
 
 
