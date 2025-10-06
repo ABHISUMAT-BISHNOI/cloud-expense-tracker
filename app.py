@@ -2,15 +2,16 @@ import streamlit as st
 import firebase_admin
 from firebase_admin import credentials, db
 from datetime import date
+import json
 
 # ---------- CONFIG ----------
-# Path to your Firebase service account JSON
-FIREBASE_CRED_PATH = "path_to_your_service_account.json"
-DATABASE_URL = "https://your-project-id-default-rtdb.firebaseio.com/"
+# Load Firebase service account key from Streamlit secrets
+firebase_key = st.secrets["firebase_key"]  # secrets.toml entry
+firebase_dict = json.loads(firebase_key)
 
 # Initialize Firebase
 if not firebase_admin._apps:
-    cred = credentials.Certificate(FIREBASE_CRED_PATH)
+    cred = credentials.Certificate(firebase_dict)
     firebase_admin.initialize_app(cred, {
         'databaseURL': "https://expense-tracker-5f660-default-rtdb.asia-southeast1.firebasedatabase.app/"
     })
@@ -87,7 +88,7 @@ if month_key in data:
         else:
             total_spent = sum(day["spent"] for day in days.values())
             remaining_balance = monthly_data["carryover"]
-            avg_daily = sum(day["daily_budget"] for day in days.values())/len(days)
+            avg_daily = sum(day["daily_budget"] for day in days.values()) / len(days)
             max_spent = max(day["spent"] for day in days.values())
             min_spent = min(day["spent"] for day in days.values())
             st.subheader("📊 Monthly Summary")
@@ -96,4 +97,5 @@ if month_key in data:
             st.write(f"Avg Daily Budget: ₹{avg_daily:.2f}")
             st.write(f"Max Daily Spending: ₹{max_spent}")
             st.write(f"Min Daily Spending: ₹{min_spent}")
+
 
