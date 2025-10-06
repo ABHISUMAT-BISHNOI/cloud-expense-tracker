@@ -6,7 +6,7 @@ import json
 
 # ---------- CONFIG ----------
 # Load Firebase service account key from Streamlit secrets
-firebase_key = st.secrets["firebase_key"]  # secrets.toml entry
+firebase_key = st.secrets["firebase"]["firebase_key"]  # secrets.toml entry
 firebase_dict = json.loads(firebase_key)
 
 # Initialize Firebase
@@ -97,5 +97,6 @@ if month_key in data:
             st.write(f"Avg Daily Budget: ₹{avg_daily:.2f}")
             st.write(f"Max Daily Spending: ₹{max_spent}")
             st.write(f"Min Daily Spending: ₹{min_spent}")
+
 
 
